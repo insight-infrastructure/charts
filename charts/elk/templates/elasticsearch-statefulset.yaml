@@ -36,6 +36,13 @@ spec:
         - containerPort: {{ .Values.elasticsearch-service.port }}
           name: {{ .Values.elasticsearch-service.targetPort }}
           protocol: {{ .Values.elasticsearch-service.protocol }}
+            cpu: 1000m
+          requests:
+            cpu: 100m
+        ports:
+        - containerPort: 9200
+          name: db
+          protocol: TCP
         - containerPort: 9300
           name: transport
           protocol: TCP
