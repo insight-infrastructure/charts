@@ -1,0 +1,35 @@
+# Default values for elk.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+namespace: kube-system
+
+elasticsearch-serviceAccount:
+  create: true
+  annotations: {}
+
+elasticsearch-service:
+  port: 9200
+  protocol: TCP
+  targetPort: db
+
+  resources:
+    limits:
+      cpu: 1000m
+    requests:
+      cpu: 100m  
+
+kibana-service:
+  type: LoadBalancer
+  port: 5601
+  protocol: TCP
+  targetPort: ui
+
+  resources:
+    limits:
+      cpu: 1000m
+    requests:
+      cpu: 100m
+
+elasticsearch-replicaCount: 2
+kibana-replicaCount: 1

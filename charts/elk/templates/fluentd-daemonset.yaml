@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: fluentd-es-v2.2.0
-  namespace: kube-system
+  namespace: {{ .Values.namespace }}
   labels:
     k8s-app: fluentd-es
     version: v2.2.0

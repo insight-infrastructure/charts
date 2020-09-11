@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: elasticsearch-logging
-  namespace: kube-system
+  namespace: {{ .Values.namespace }}
   labels:
     k8s-app: elasticsearch-logging
     version: v6.2.5
@@ -10,7 +10,7 @@ metadata:
     addonmanager.kubernetes.io/mode: Reconcile
 spec:
   serviceName: elasticsearch-logging
-  replicas: 2
+  replicas: {{ .Values.elasticsearch-replicaCount }}
   selector:
     matchLabels:
       k8s-app: elasticsearch-logging
@@ -29,6 +29,13 @@ spec:
         resources:
           # need more cpu upon initialization, therefore burstable class
           limits:
+            cpu: {{ .Values.elasticsearch-service.resources.requests.cpu }}
+          requests:
+            cpu: {{ .Values.elasticsearch-service.resources.requests.cpu }}
+        ports:
+        - containerPort: {{ .Values.elasticsearch-service.port }}
+          name: {{ .Values.elasticsearch-service.targetPort }}
+          protocol: {{ .Values.elasticsearch-service.protocol }}
             cpu: 1000m
           requests:
             cpu: 100m

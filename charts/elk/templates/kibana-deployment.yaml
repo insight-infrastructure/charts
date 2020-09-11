@@ -2,13 +2,13 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kibana-logging
-  namespace: kube-system
+  namespace: {{ .Values.namespace }}
   labels:
     k8s-app: kibana-logging
     kubernetes.io/cluster-service: "true"
     addonmanager.kubernetes.io/mode: Reconcile
 spec:
-  replicas: 1
+  replicas: {{ .Values.kibana-replicaCount }}
   selector:
     matchLabels:
       k8s-app: kibana-logging
@@ -25,13 +25,13 @@ spec:
         resources:
           # need more cpu upon initialization, therefore burstable class
           limits:
-            cpu: 1000m
+            cpu: {{ .Values.kibana-service.resources.limits.cpu }}
           requests:
-            cpu: 100m
+            cpu: {{ .Values.kibana-service.resources.requests.cpu }}
         env:
           - name: ELASTICSEARCH_URL
             value: http://elasticsearch-logging:9200
         ports:
-        - containerPort: 5601
-          name: ui
-          protocol: TCP
+        - containerPort: {{ .Values.kibana-service.port }}
+          name: {{ .Values.kibana-service.targetPort }}
+          protocol: {{ .Values.kibana-service.protocol }}

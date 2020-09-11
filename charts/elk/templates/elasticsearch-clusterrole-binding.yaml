@@ -1,7 +1,7 @@
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  namespace: kube-system
+  namespace: {{ .Values.namespace }}
   name: elasticsearch-logging
   labels:
     k8s-app: elasticsearch-logging

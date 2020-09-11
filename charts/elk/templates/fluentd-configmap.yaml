@@ -2,7 +2,7 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: fluentd-es-config-v0.1.4
-  namespace: kube-system
+  namespace: {{ .Values.namespace }}
   labels:
     addonmanager.kubernetes.io/mode: Reconcile
 data:
@@ -335,7 +335,7 @@ data:
     <source>
       @id journald-container-runtime
       @type systemd
-      filters [{ "_SYSTEMD_UNIT": "fluentd.service" }]
+      filters [{ "_SYSTEMD_UNIT": "fluentd-es.service" }]
       <storage>
         @type local
         persistent true
