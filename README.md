@@ -1,11 +1,4 @@
-# Insight Infrastructure Helm Charts 
+# Charts 
 
-> WIP - Just getting started
+Helm charts for insight-infrastructure. 
 
-
-### Resources 
-
-- [gruntwork-io/pre-commit](https://github.com/gruntwork-io/pre-commit)
-- [helm-docs](https://github.com/norwoodj/helm-docs)
-- [terratest-helm-testing-example](https://github.com/gruntwork-io/terratest-helm-testing-example)
-- [Create a public Helm chart repository with GitHub Pages](https://medium.com/@mattiaperi/create-a-public-helm-chart-repository-with-github-pages-49b180dbb417)
