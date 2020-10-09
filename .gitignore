@@ -1,15 +1,9 @@
-# Terraform files
-.terraform
-terraform.tfstate
-terraform.tfvars
-*.tfstate*
+# Main
+.releases
 
 # OS X files
 .history
 .DS_Store
-
-# lambda zip files
-lambda.zip
 
 # IntelliJ files
 .idea_modules
@@ -21,19 +15,3 @@ build/
 */build/
 out/
 
-# Go best practices dictate that libraries should not include the vendor directory
-vendor
-
-# Python stuff
-dist
-aws_auth_configmap_generator.*
-.python-version
-.tox
-__pycache__
-*.pyc
-
-# Folder used to store temporary test data by Terratest
-.test-data
-
-# Generic temporary files
-/tmp
