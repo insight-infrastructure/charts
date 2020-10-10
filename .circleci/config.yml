@@ -6,8 +6,6 @@ workflows:
     jobs:
       - lint
       - release:
-          context:
-            - ii-ci-1
           requires:
             - lint
           filters:
