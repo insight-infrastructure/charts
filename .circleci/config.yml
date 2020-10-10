@@ -21,10 +21,10 @@ jobs:
       - image: alpine/helm:3.3.1
     steps:
       - checkout
-      - run: |
-          apk --no-cache add bash
-          chmod +x scripts/lint.sh
-      - run: ./scripts/lint.sh
+#      - run: |
+#          apk --no-cache add bash
+#          chmod +x scripts/lint.sh
+#      - run: ./scripts/lint.sh
   release:
     docker:
       - image: alpine/helm:3.3.1
