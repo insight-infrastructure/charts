@@ -1,0 +1,53 @@
+{{- if .Values.backends.jsonRPC.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ template "deployment.fullname" . }}-rpc-proxy
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ template "deployment.name" . }}
+    chart: {{ template "deployment.chart" . }}
+    release: {{ .Release.Name }}
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    {{- if .Values.global.ssl.enabled}}
+    cert-manager.io/cluster-issuer: "{{ .Values.global.ssl.clusterIssuer }}"
+  {{- end }}
+spec:
+  {{- if .Values.global.ssl.enabled }}
+  tls:
+    - hosts:
+        {{- if .Values.global.endpoints.deployment.enabled }}
+        - "{{ .Values.global.endpoints.deployment.domain }}"
+        {{- end }}
+        {{- if .Values.global.endpoints.aggregate.enabled }}
+        - "{{ .Values.global.endpoints.aggregate.domain }}"
+        {{- end }}
+    - secretName: {{ template "deployment.fullname" . }}-tls
+  {{- end }}
+  rules:
+    {{- if .Values.global.endpoints.deployment.enabled }}
+    - host: "{{ .Values.global.endpoints.deployment.domain }}"
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/v0"
+            backend:
+              service:
+                name: {{ template "deployment.fullname" . }}-rpc-proxy
+                port:
+                  name: {{ .Values.global.endpoints.networkName }}-rpc-proxy
+    {{- end }}
+    {{- if .Values.global.endpoints.aggregate.enabled }}
+    - host: "{{ .Values.global.endpoints.aggregate.domain }}"
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: {{ template "deployment.fullname" . }}-rpc-proxy
+                port:
+                  name: {{ .Values.global.endpoints.networkName }}-rpc-proxy
+  {{- end }}
+  {{- end }}

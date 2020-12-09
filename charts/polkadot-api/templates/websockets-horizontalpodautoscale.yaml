@@ -1,0 +1,31 @@
+{{- if .Values.backends.websockets.scaler.enabled -}}
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ template "deployment.fullname" . }}-{{ .Values.global.endpoints.networkName }}-autoscaler
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ template "deployment.name" . }}
+    chart: {{ template "deployment.chart" . }}
+    release: {{ .Release.Name }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ template "deployment.fullname" . }}-{{ .Values.global.endpoints.networkName }}-websockets-proxy
+  minReplicas: {{ .Values.backends.websockets.scaler.minReplicas }}
+  maxReplicas: {{ .Values.backends.websockets.scaler.maxReplicas }}
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.backends.websockets.scaler.avgCPU }}
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: AverageValue
+          averageValue: {{ .Values.backends.websockets.scaler.avgMem }}
+{{- end }}

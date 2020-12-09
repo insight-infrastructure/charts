@@ -1,0 +1,21 @@
+{{- if .Values.backends.websockets.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "deployment.fullname" . }}-websockets-proxy
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ template "deployment.name" . }}
+    chart: {{ template "deployment.chart" . }}
+    release: {{ .Release.Name }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: 9943
+      name: {{ .Values.global.endpoints.networkName }}-websocket-proxy
+      targetPort: 9943
+  selector:
+    app: {{ template "deployment.name" . }}
+    release: "{{ .Release.Name }}"
+    component: {{ .Values.global.endpoints.networkName }}-websockets-proxy
+{{- end }}

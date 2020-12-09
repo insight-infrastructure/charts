@@ -1,0 +1,37 @@
+global:
+  ssl:
+    enabled: true
+    clusterIssuer: "letsencrypt"
+  endpoints:
+    networkName: "polkadot"
+    deployment:
+      enabled: true
+      domain: "example.com"
+    aggregate:
+      enabled: true
+      domain: "example.com"
+
+backends:
+  websockets:
+    image: "shinyfoil/wsproxy:v0.1"
+    enabled: true
+    replicas: 1
+    logClient: true
+    logServer: false
+    upstreamServerURI: "ws://localhost:9944"
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 256Mi
+    scaler:
+      enabled: true
+      minReplicas: 1
+      maxReplicas: 10
+      avgCPU: 50
+      avgMem: 100Mi
+  jsonRPC:
+    enabled: true
+    upstreamServerURI: "http://localhost:9933"

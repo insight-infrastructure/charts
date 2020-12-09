@@ -1,0 +1,52 @@
+{{- if .Values.backends.websockets.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "deployment.fullname" . }}-websockets-proxy
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ template "deployment.name" . }}
+    chart: {{ template "deployment.chart" . }}
+    release: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.backends.websockets.replicas }}
+  selector:
+    matchLabels:
+      app: {{ template "deployment.name" . }}
+      chart: {{ template "deployment.chart" . }}
+      release: {{ .Release.Name }}
+      component: {{ .Values.global.endpoints.networkName }}-websockets-proxy
+  template:
+    metadata:
+      labels:
+        app: {{ template "deployment.name" . }}
+        chart: {{ template "deployment.chart" . }}
+        release: {{ .Release.Name }}
+        component: {{ .Values.global.endpoints.networkName }}-websockets-proxy
+    spec:
+      containers:
+        - name: {{ .Values.global.endpoints.networkName }}-websockets-proxy
+          image: "{{ .Values.backends.websockets.image }}"
+          resources:
+            limits:
+              cpu: {{ .Values.backends.websockets.resources.limits.cpu }}
+              memory: {{ .Values.backends.websockets.resources.limits.memory }}
+            requests:
+              cpu: {{ .Values.backends.websockets.resources.requests.cpu }}
+              memory: {{ .Values.backends.websockets.resources.requests.memory }}
+          ports:
+            - containerPort: 9943
+              name: {{ .Values.global.endpoints.networkName }}-websocket-proxy
+              protocol: TCP
+          env:
+            - name: WS_LOGGER_EXPOSED_PORT
+              value: "9943"
+            - name: WS_LOGGER_FORWARD_ADDR
+              value: "{{ .Values.backends.websockets.upstreamServerURI }}"
+            - name: WS_LOGGER_LOG_CLIENT
+              value: {{ .Values.backends.websockets.logClient }}
+            - name: WS_LOGGER_LOG_SERVER
+              value: {{ .Values.backends.websockets.logServer }}
+          command:
+            - "/bin/sh /main"
+{{- end }}

@@ -1,14 +1,13 @@
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.3.0
+    rev: v3.3.0
     hooks:
       - id: check-yaml
+        exclude: ^charts/\S*/templates/
         args: [--allow-multiple-documents]
-      - id: check-yaml
-        exclude: ^charts/*/templates/
 
   - repo: https://github.com/gruntwork-io/pre-commit
-    rev: v0.0.9
+    rev: v0.1.11
     hooks:
       - id: helmlint

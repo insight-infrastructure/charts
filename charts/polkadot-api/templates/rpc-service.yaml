@@ -1,0 +1,14 @@
+{{- if .Values.backends.jsonRPC.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "deployment.fullname" . }}-rpc-proxy
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ template "deployment.name" . }}
+    chart: {{ template "deployment.chart" . }}
+    release: {{ .Release.Name }}
+spec:
+  type: ExternalName
+  externalName: "{{ .Values.backends.jsonRPC.upstreamServerURI }}"
+{{- end }}
