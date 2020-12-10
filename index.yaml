@@ -14,6 +14,17 @@ entries:
   polkadot-api:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2020-12-10T19:38:16.989694767Z"
+    description: Chart to deploy API ingress routing and logging services for Polkadot
+      API
+    digest: 717379344737423ffa684d50251e090af100369d8f32c07d8f2f96c6fb6af14f
+    name: polkadot-api
+    type: application
+    urls:
+    - https://github.com/insight-infrastructure/charts/releases/download/polkadot-api-0.1.3/polkadot-api-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2020-12-10T19:32:32.242490563Z"
     description: Chart to deploy API ingress routing and logging services for Polkadot
       API
