@@ -44,9 +44,9 @@ spec:
             - name: WS_LOGGER_FORWARD_ADDR
               value: "ws://{{ .Values.backends.websockets.upstreamServerURI }}"
             - name: WS_LOGGER_LOG_CLIENT
-              value: {{ .Values.backends.websockets.logClient }}
+              value: "{{ .Values.backends.websockets.logClient }}"
             - name: WS_LOGGER_LOG_SERVER
-              value: {{ .Values.backends.websockets.logServer }}
+              value: "{{ .Values.backends.websockets.logServer }}"
           command:
             - "/bin/sh /main"
 {{- end }}
