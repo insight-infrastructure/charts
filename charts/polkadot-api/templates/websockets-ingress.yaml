@@ -30,8 +30,7 @@ spec:
     - host: "{{ .Values.global.endpoints.deployment.domain }}"
       http:
         paths:
-          - pathType: Prefix
-            path: "/"
+          - path: "/"
             backend:
               serviceName: {{ template "deployment.fullname" . }}-websockets-proxy
               servicePort: {{ .Values.global.endpoints.networkName }}-websocket-proxy
@@ -40,8 +39,7 @@ spec:
     - host: "{{ .Values.global.endpoints.aggregate.domain }}"
       http:
         paths:
-          - pathType: Prefix
-            path: "/"
+          - path: "/"
             backend:
               serviceName: {{ template "deployment.fullname" . }}-websockets-proxy
               servicePort: {{ .Values.global.endpoints.networkName }}-websocket-proxy
