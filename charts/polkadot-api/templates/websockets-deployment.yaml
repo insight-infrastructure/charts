@@ -47,6 +47,4 @@ spec:
               value: "{{ .Values.backends.websockets.logClient }}"
             - name: WS_LOGGER_LOG_SERVER
               value: "{{ .Values.backends.websockets.logServer }}"
-          command:
-            - "/bin/sh /main"
 {{- end }}
