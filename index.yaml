@@ -11,4 +11,16 @@ entries:
     urls:
     - https://github.com/insight-infrastructure/charts/releases/download/elk-0.1.0/elk-0.1.0.tgz
     version: 0.1.0
+  polkadot-api:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2020-12-10T17:47:57.349227809Z"
+    description: Chart to deploy API ingress routing and logging services for Polkadot
+      API
+    digest: bb24c708ea5e984d27a198560513ee88c8d998989c23137067a5ea4c33c8ee09
+    name: polkadot-api
+    type: application
+    urls:
+    - https://github.com/insight-infrastructure/charts/releases/download/polkadot-api-0.1.0/polkadot-api-0.1.0.tgz
+    version: 0.1.0
 generated: "2020-10-08T22:58:07.983284256-07:00"
