@@ -12,7 +12,7 @@ spec:
   type: ClusterIP
   ports:
     - port: 9943
-      name: {{ .Values.global.endpoints.networkName }}-websocket-proxy
+      name: {{ .Values.global.endpoints.networkShortName }}-ws
       targetPort: 9943
   selector:
     app: {{ template "deployment.name" . }}

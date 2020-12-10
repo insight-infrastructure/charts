@@ -36,7 +36,7 @@ spec:
               memory: {{ .Values.backends.websockets.resources.requests.memory }}
           ports:
             - containerPort: 9943
-              name: {{ .Values.global.endpoints.networkName }}-websocket-proxy
+              name: {{ .Values.global.endpoints.networkShortName }}-ws
               protocol: TCP
           env:
             - name: WS_LOGGER_EXPOSED_PORT

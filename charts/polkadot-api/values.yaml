@@ -4,6 +4,7 @@ global:
     clusterIssuer: "letsencrypt"
   endpoints:
     networkName: "polkadot"
+    networkShortName: "polkadot"
     deployment:
       enabled: true
       domain: "example.com"

@@ -33,7 +33,7 @@ spec:
           - path: "/v0"
             backend:
               serviceName: {{ template "deployment.fullname" . }}-rpc-proxy
-              servicePort: {{ .Values.global.endpoints.networkName }}-rpc-proxy
+              servicePort: {{ .Values.global.endpoints.networkShortName }}-rpc
     {{- end }}
     {{- if .Values.global.endpoints.aggregate.enabled }}
     - host: "{{ .Values.global.endpoints.aggregate.domain }}"
@@ -42,6 +42,6 @@ spec:
           - path: "/"
             backend:
               serviceName: {{ template "deployment.fullname" . }}-rpc-proxy
-              servicePort: {{ .Values.global.endpoints.networkName }}-rpc-proxy
+              servicePort: {{ .Values.global.endpoints.networkShortName }}-rpc
   {{- end }}
   {{- end }}
