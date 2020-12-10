@@ -18,7 +18,7 @@ backends:
     replicas: 1
     logClient: true
     logServer: false
-    upstreamServerURI: "ws://localhost:9944"
+    upstreamServerURI: "localhost:9944"
     resources:
       limits:
         cpu: 1000m
@@ -34,4 +34,4 @@ backends:
       avgMem: 100Mi
   jsonRPC:
     enabled: true
-    upstreamServerURI: "http://localhost:9933"
+    upstreamServerURI: "localhost:9933"

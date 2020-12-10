@@ -42,7 +42,7 @@ spec:
             - name: WS_LOGGER_EXPOSED_PORT
               value: "9943"
             - name: WS_LOGGER_FORWARD_ADDR
-              value: "{{ .Values.backends.websockets.upstreamServerURI }}"
+              value: "ws://{{ .Values.backends.websockets.upstreamServerURI }}"
             - name: WS_LOGGER_LOG_CLIENT
               value: {{ .Values.backends.websockets.logClient }}
             - name: WS_LOGGER_LOG_SERVER
