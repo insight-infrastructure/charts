@@ -17,13 +17,14 @@ spec:
   {{- if .Values.global.ssl.enabled }}
   tls:
     - hosts:
-        {{- if .Values.global.endpoints.deployment.enabled }}
+      {{- if .Values.global.endpoints.deployment.enabled }}
         - "{{ .Values.global.endpoints.deployment.domain }}"
-        {{- end }}
-        {{- if .Values.global.endpoints.aggregate.enabled }}
+      secretName: {{ template "deployment.fullname" . }}-ws-dep-tls
+      {{- end }}
+      {{- if .Values.global.endpoints.aggregate.enabled }}
         - "{{ .Values.global.endpoints.aggregate.domain }}"
+      secretName: {{ template "deployment.fullname" . }}-ws-agg-tls
     {{- end }}
-    - secretName: {{ template "deployment.fullname" . }}-tls
   {{- end }}
   rules:
     {{- if .Values.global.endpoints.deployment.enabled }}

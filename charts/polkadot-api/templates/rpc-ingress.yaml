@@ -19,11 +19,12 @@ spec:
     - hosts:
         {{- if .Values.global.endpoints.deployment.enabled }}
         - "{{ .Values.global.endpoints.deployment.domain }}"
+      secretName: {{ template "deployment.fullname" . }}-rpc-dep-tls
         {{- end }}
         {{- if .Values.global.endpoints.aggregate.enabled }}
         - "{{ .Values.global.endpoints.aggregate.domain }}"
-        {{- end }}
-    - secretName: {{ template "deployment.fullname" . }}-tls
+      secretName: {{ template "deployment.fullname" . }}-rpc-agg-tls
+  {{- end }}
   {{- end }}
   rules:
     {{- if .Values.global.endpoints.deployment.enabled }}
