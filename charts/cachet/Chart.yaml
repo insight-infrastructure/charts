@@ -1,0 +1,8 @@
+apiVersion: v2
+description: A Helm chart for Kubernetes
+name: cachet
+version: 0.1.0
+dependencies:
+  - name: postgresql
+    version: "~10.2.0"
+    repository: "https://charts.bitnami.com/bitnami"
