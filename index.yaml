@@ -1,5 +1,18 @@
 apiVersion: v1
 entries:
+  cachet:
+  - apiVersion: v2
+    created: "2020-12-16T16:07:11.292787467Z"
+    dependencies:
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: ~10.2.0
+    description: A Helm chart for Kubernetes
+    digest: 10b33ce53f27ff0b8454dbc696dbbc47354003ccee73a17ad5f80d043882c6a3
+    name: cachet
+    urls:
+    - https://github.com/insight-infrastructure/charts/releases/download/cachet-0.1.0/cachet-0.1.0.tgz
+    version: 0.1.0
   elk:
   - apiVersion: v2
     appVersion: 1.16.0
