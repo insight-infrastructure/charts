@@ -4,7 +4,7 @@ mkdir -p .releases
 mkdir -p .releases-done
 
 for chart in $(ls charts); do
-    helm package "charts/${chart}" --destination .releases/
+    helm package "charts/${chart}" --dependency-update --destination .releases/
     cr upload -r "${CIRCLE_PROJECT_REPONAME}" -o "${CIRCLE_PROJECT_USERNAME}" -p ".releases/" -t "${GITHUB_TOKEN}"
     mv .releases/${chart}* .releases-done/
 done
